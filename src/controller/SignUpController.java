@@ -1,8 +1,8 @@
 package controller;
 
+
 import java.io.IOException;
 import java.time.LocalDate;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,14 +34,23 @@ public class SignUpController extends HttpServlet {
 	
 		
 		
-			String email = request.getParameter("email"); //  get the email value from the jsp/html page
+		String email = request.getParameter("email"); //  get the email value from the jsp/html page
 		String password = request.getParameter("password"); //  get the password value from the jsp/html page
 		String confirmPassword = request.getParameter("confirmPassword"); //  get the confirm password value from the jsp/html page
 		LocalDate date= LocalDate.now(); // Java 8 Time API used to get system date and time at a particular instance
 		
 		// Fill your code here
-		
-		
+		User user =new User();
+		UserDAO ud=new UserDAO();
+		user.setEmail(email);
+		user.setPassword(password);
+		user.setDate(date);
+		int checkUser=0;
+		try {
+			checkUser=ud.signUP(user);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		if(checkUser!=0)
 		{
 						
